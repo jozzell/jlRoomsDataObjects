@@ -56,11 +56,15 @@ import obj.pdf.pdfRptMgr;
 public class bookingTable {
     Document document = null;
     File f;
+    pdfRptMgr pdfRptMgr;
     String fileName;
     //public void close(propertiesBean bean,String header,Stri){
     //    if (document != null ) document.close();
         
    // }
+    public bookingTable(){
+        pdfRptMgr = new pdfRptMgr();
+    }
     public String close(){
         if (document != null ) document.close();
        System.out.println( f.getAbsolutePath());
@@ -269,7 +273,7 @@ public class bookingTable {
             
              //PdfPTable table = new PdfPTable(7);
              table.setWidthPercentage(100); // percentage			
-             jlRoomsFactoryRpt.setRptHeaderCell(new String[] {"Status","Balance Due", "Description","Cost","Cnt","Days","Total"}, table);
+             (new jlRoomsFactoryRpt()).setRptHeaderCell(new String[] {"Status","Balance Due", "Description","Cost","Cnt","Days","Total"}, table);
               PdfPCell //cellX  = new PdfPCell(),
                        cell1 = new PdfPCell(),
                        cell2 = new PdfPCell(),
@@ -324,7 +328,7 @@ public class bookingTable {
             PdfPTable table = new PdfPTable(widths);
              //PdfPTable table = new PdfPTable(5);
              table.setWidthPercentage(100); // percentage
-             jlRoomsFactoryRpt.setRptHeaderCell(new String[] {"Date","Name", "Desc","Booking","Amt"}, table);
+             (new jlRoomsFactoryRpt()).setRptHeaderCell(new String[] {"Date","Name", "Desc","Booking","Amt"}, table);
               
              for (int i = 0; i < list.size(); i++){
                x = list.get(i);
@@ -422,7 +426,7 @@ public class bookingTable {
             table.setWidthPercentage(100); // percentage
            cellX.setPhrase(pdfRptMgr.getRptFont(x.getDesc()+" ("+x.getLookupDesc()+")"+"\n"+x.getVendor(),true));
            table.addCell(cellX);
-           jlRoomsFactoryRpt.setRptHeaderCell(new String[] {"Name", "E-Maile","Phone #","Addr", "City/State"}, table);
+           (new jlRoomsFactoryRpt()).setRptHeaderCell(new String[] {"Name", "E-Maile","Phone #","Addr", "City/State"}, table);
            for (int j = 0; j < y.size(); j++){
                v2RptClientRmMateBean b = y.get(j);
                 cell0.setPhrase(pdfRptMgr.getRptFont(b.getFirstName()+" "+b.getFirstName()));
@@ -524,7 +528,7 @@ public class bookingTable {
         }
      }
     private  PdfPTable getInvoiceTable(int cust,sponsorBean sponsorBean,String key ) {
-        
+        jlRoomsFactoryRpt jlRoomsFactoryRpt =  new jlRoomsFactoryRpt();
         float[] widths = {
             0.20f, .80f};
         PdfPTable table = new PdfPTable(widths);
@@ -566,7 +570,7 @@ public class bookingTable {
         return table;
     }
     private  PdfPTable getInvoiceCust(custBean bean) {
-        
+        jlRoomsFactoryRpt jlRoomsFactoryRpt =  new jlRoomsFactoryRpt();
         PdfPTable table = new PdfPTable(1);
         table.setWidthPercentage(100); // percentage
         PdfPCell cell = new PdfPCell();

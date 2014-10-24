@@ -12,7 +12,7 @@ import javax.faces.bean.ManagedBean;
  */
 @ManagedBean(name = "rptBeanPDFObj")
 public class rptBeanPDFObj {
-    public static final int
+    public  final int
             rptView_customer_payment_TS = 0,
             rptView_customer_payment_ID = 1;
 }

@@ -203,9 +203,9 @@ public class sponsorObj  implements Serializable{
      if (b.getSponsorId() == 0) {
         
        return new Object[] {
-           JlRoomsDataObjects.getDate(b.getEffDate()),
+           (new JlRoomsDataObjects()).getDate(b.getEffDate()),
            b.getSponsorDesc() == null ? "" : b.getSponsorDesc(),
-           JlRoomsDataObjects.getDate(b.getEndDate()),
+           (new JlRoomsDataObjects()).getDate(b.getEndDate()),
            new Integer(b.getFlagId()),
            new Double(b.getProcFee()),
            new Double(b.getProcFeeHotel()),
@@ -224,9 +224,9 @@ public class sponsorObj  implements Serializable{
      } else {
          
        return new Object[] {
-          JlRoomsDataObjects.getDate(b.getEffDate()),
+          (new JlRoomsDataObjects()).getDate(b.getEffDate()),
           b.getSponsorDesc() == null ? "" : b.getSponsorDesc(),
-          JlRoomsDataObjects.getDate(b.getEndDate()),
+          (new JlRoomsDataObjects()).getDate(b.getEndDate()),
           new Integer(b.getFlagId()),
           new Double(b.getProcFee()),
           new Double(b.getProcFeeHotel()),

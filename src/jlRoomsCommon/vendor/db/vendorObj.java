@@ -5,7 +5,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jlRoomsCommon._beans.vendorBean;
 import jlRoomsCommon._objects.jlRoomsDbConnIinterface;
-import jlRoomsDO.JlRoomsDataObjects;
+import jlRoomsDO.vendorObjTypesENum;
+
 import obj.db.v1.dbMgrInterface;
 
 import sun.jdbc.rowset.*;
@@ -35,7 +36,7 @@ public class vendorObj  implements Serializable{
     
         rs = mgr.getCachedRowSet(vendorSql.sqlGetDefaultID,
                 new Object[] {
-                    JlRoomsDataObjects.VENDOR_SPONSOR,
+                    vendorObjTypesENum.VENDOR_SPONSOR.getType(),
                     key,
                     id});
         while (rs.next()){

@@ -12,6 +12,7 @@ import jlRoomsCommon._beans.flightInfoBean;
 import jlRoomsCommon._objects.jlRoomsDbConnIinterface;
 import jlRoomsCommon.sponsorHotel.db.sponsorHotelSql;
 import jlRoomsDO.JlRoomsDataObjects;
+import jlRoomsDO.vendorObjTypesENum;
 import obj.db.v1.dbMgrInterface;
 
 /**
@@ -181,7 +182,7 @@ public List<flightInfoBean> getSponsorFlightInfo(int sponsor,dbMgrInterface db) 
         return updateFlight(bean,this.jlRoomsFactory);
     }
     public int updateFlight(flightInfoBean bean,dbMgrInterface db) {
-        bean.setCreated(JlRoomsDataObjects.getTimeStampString());
+        bean.setCreated((new JlRoomsDataObjects()).getTimeStampString());
         boolean insert = bean.getFltId() == 0;
         String sql = (insert ? flightSql.sqlInsert(this.webID) : flightSql.sqlUpdate(this.webID));
         try {
@@ -195,9 +196,10 @@ public List<flightInfoBean> getSponsorFlightInfo(int sponsor,dbMgrInterface db) 
                 } else {
                     x = bean.getFltId();
                 }
+                String str = vendorObjTypesENum.DEFAULT.getENUM(bean.getVendorType()).getSubRmDesc();
                 db.updateDatabase(sponsorHotelSql.sqlUpdate_dsp_str1(this.webID),
                         new Object[]{
-                            JlRoomsDataObjects.getAirTextSub(bean.getVendorType())
+                            str
                             + " # " + bean.getFltNumber()
                             + " Departing: " + new SimpleDateFormat("EEE MMM dd yyyy hh:mm a").format(bean.getFltDepartureDate())
                             + " From " + bean.getFltDeparturePlace(),
@@ -231,10 +233,10 @@ public List<flightInfoBean> getSponsorFlightInfo(int sponsor,dbMgrInterface db) 
             
             
             return new Object[]{
-                        JlRoomsDataObjects.getDate(bean.getFltArrivalDate()),
+                        (new JlRoomsDataObjects()).getDate(bean.getFltArrivalDate()),
                         bean.getFltArrivalPlace() == null ? "" : bean.getFltArrivalPlace(),
                         bean.getFltComment() == null ? "" : bean.getFltComment(),
-                        JlRoomsDataObjects.getDate(bean.getFltDepartureDate()),
+                        (new JlRoomsDataObjects()).getDate(bean.getFltDepartureDate()),
                         bean.getFltDeparturePlace() == null ? "" : bean.getFltDeparturePlace(),
                         bean.getFltNumber() == null ? "" : bean.getFltNumber(),
                         new Double(bean.getFltType()),
@@ -253,10 +255,10 @@ public List<flightInfoBean> getSponsorFlightInfo(int sponsor,dbMgrInterface db) 
 
         } else {
             return new Object[]{
-                        JlRoomsDataObjects.getDate(bean.getFltArrivalDate()),
+                        (new JlRoomsDataObjects()).getDate(bean.getFltArrivalDate()),
                         bean.getFltArrivalPlace() == null ? "" : bean.getFltArrivalPlace(),
                         bean.getFltComment() == null ? "" : bean.getFltComment(),
-                        JlRoomsDataObjects.getDate(bean.getFltDepartureDate()),
+                        (new JlRoomsDataObjects()).getDate(bean.getFltDepartureDate()),
                         bean.getFltDeparturePlace() == null ? "" : bean.getFltDeparturePlace(),
                         bean.getFltNumber() == null ? "" : bean.getFltNumber(),
                         new Double(bean.getFltType()),

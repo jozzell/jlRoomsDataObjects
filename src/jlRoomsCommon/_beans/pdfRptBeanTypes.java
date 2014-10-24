@@ -14,7 +14,7 @@ import javax.faces.bean.ManagedBean;
  */
 @ManagedBean(name = "pdfRptBeanTypes")
 public class pdfRptBeanTypes implements Serializable{
-    public static final int RPT_1ST_NIGHT = 0,  RPT_SUMMARY = 1,
+    public final int RPT_1ST_NIGHT = 0,  RPT_SUMMARY = 1,
             RPT = 3,RPT_BEAN=4,
             PAYMENT_OVERVIEW_CUSTOMER = 100,
             PAYMENT_OVERVIEW_VENDOR = 0,

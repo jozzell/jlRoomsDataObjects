@@ -19,6 +19,7 @@ import sun.jdbc.rowset.CachedRowSet;
  */
 public class rptView_vendor_payment_summaryPDF extends objMgr {
     public  void rptView_vendor_payment_summaryPDF(Document doc, CachedRowSet cr)throws Exception {
+        jlRoomsFactoryRpt jlRoomsFactoryRpt =  new jlRoomsFactoryRpt();
         float[] widths = {0.20f, 0.20f,0.30f,0.20f,0.20f};
          PdfPTable table = new PdfPTable(widths);
          table.setWidthPercentage(100); // percentage
@@ -81,7 +82,7 @@ public class rptView_vendor_payment_summaryPDF extends objMgr {
             table.addCell(totCell);
             amtCell.setPhrase(jlRoomsFactoryRpt.getRptFont(this.getDollarFormat(tot)));
             table.addCell(amtCell);
-            JlRoomsDataObjects.docPgBreak(doc,null);
+            (new JlRoomsDataObjects()).docPgBreak(doc,null);
             doc.add(table);
         } catch (Exception e){
             throw e;

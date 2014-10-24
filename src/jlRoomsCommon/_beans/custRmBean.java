@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.*;
 import javax.faces.bean.ManagedBean;
 import jlRoomsDO.JlRoomsDataObjects;
+import jlRoomsDO.vendorObjTypesENum;
+import obj.reusableObj;
 /**
  *
  * @author lmeans
@@ -34,8 +36,8 @@ private int custRoomId,custId,blockId,custRoomType,flag=0,roomPaid,loginId;
 
   }
   public String displayRmSplit(){
-     if (     vendorType == JlRoomsDataObjects.VENDOR_HOTEL || 
-              vendorType == JlRoomsDataObjects.VENDOR_CRUISES ||
+     if (     vendorType == vendorObjTypesENum.VENDOR_HOTEL.getType() || 
+              vendorType == vendorObjTypesENum.VENDOR_CRUISES.getType() ||
               vendorType == -18){
         return "true";
     }else {
@@ -55,7 +57,7 @@ private int custRoomId,custId,blockId,custRoomType,flag=0,roomPaid,loginId;
   }
   public double getCustRoomCnt() {
       
-    return obj.reusableObj.round(custRoomCnt,2);
+    return (new reusableObj()).round(custRoomCnt,2);
   }
   public int getCustRoomId() {
     return custRoomId;
@@ -86,7 +88,7 @@ private int custRoomId,custId,blockId,custRoomType,flag=0,roomPaid,loginId;
     return region;
   }
   public double getRmCost() {
-      return obj.reusableObj.round(rmCost,2);
+      return (new reusableObj()).round(rmCost,2);
     
   }
   public String getRmDesc() {
@@ -196,8 +198,9 @@ private int custRoomId,custId,blockId,custRoomType,flag=0,roomPaid,loginId;
                 str = "Total Cost";
                 break;
         }
+       
         setDisplay1(str);
-        setDisplay2("# of " + JlRoomsDataObjects.getBookingTypeDesc(vendorType));
+        setDisplay2("# of " +  vendorObjTypesENum.DEFAULT.getENUMPicked(vendorType).getRoomDesc());
     this.vendorType = vendorType;
   }
   public int getDays() {
@@ -213,7 +216,7 @@ private int custRoomId,custId,blockId,custRoomType,flag=0,roomPaid,loginId;
     this.roommateId = roommateId;
   }
   public double getTotalCost() {
-      return obj.reusableObj.round(totalCost,2);
+      return (new reusableObj()).round(totalCost,2);
    
   }
   public void setTotalCost(double totalCost) {
@@ -273,7 +276,7 @@ private int custRoomId,custId,blockId,custRoomType,flag=0,roomPaid,loginId;
   }
 
   public double getBlockCostCnt() {
-      return obj.reusableObj.round(blockCostCnt,2);
+      return (new reusableObj()).round(blockCostCnt,2);
   }
 
   public void setSponsorHotelId(int sponsorHotelId) {

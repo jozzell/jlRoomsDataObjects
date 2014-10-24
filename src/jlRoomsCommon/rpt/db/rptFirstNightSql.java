@@ -18,7 +18,7 @@ public class rptFirstNightSql {
             "select sum(amt_rec),max(db_timestamp) from customer_payment where vendor_id = ?";
     
 
-public  final static int WHERE_SPONSOR=0,WHERE_DB_TIMESTAMP=2;
+public  final int WHERE_SPONSOR=0,WHERE_DB_TIMESTAMP=2;
   public  String inClase(int[] ary) {
     if (ary == null || ary.length == 0) return "";
       String s = "";

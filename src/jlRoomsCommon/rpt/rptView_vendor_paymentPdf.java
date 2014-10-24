@@ -23,6 +23,7 @@ public class rptView_vendor_paymentPdf extends objMgr {
          get_rptView_Vendor_payment(doc,cr,1);
      }
     private  void get_rptView_Vendor_payment(Document doc, CachedRowSet cr, int type)throws Exception {
+        jlRoomsFactoryRpt jlRoomsFactoryRpt =  new jlRoomsFactoryRpt();
          float[] widths = {0.25f, 0.40f, 0.2f, 0.15f};
          PdfPTable table = new PdfPTable(widths);
          table.setWidthPercentage(100); // percentage
@@ -136,7 +137,7 @@ public class rptView_vendor_paymentPdf extends objMgr {
                 table.addCell(cell1);
 
             }
-            JlRoomsDataObjects.docPgBreak(doc,null);
+            (new JlRoomsDataObjects()).docPgBreak(doc,null);
             doc.add(table);
         } catch (Exception ex) {
             throw ex;

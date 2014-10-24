@@ -21,6 +21,7 @@ import sun.jdbc.rowset.CachedRowSet;
  */
 public class rptView_customer_payment_summaryPDF extends objMgr {
      public  void get_rptView_customer_payment_summary(Document doc, CachedRowSet cr) throws Exception {
+         jlRoomsFactoryRpt jlRoomsFactoryRpt =  new jlRoomsFactoryRpt();
         if (cr == null) return;
         String name = null, str = "";
         int curr = 0, last = 0;
@@ -103,7 +104,7 @@ public class rptView_customer_payment_summaryPDF extends objMgr {
 
             }
             
-                JlRoomsDataObjects.docPgBreak(doc,null);
+                (new JlRoomsDataObjects()).docPgBreak(doc,null);
                 doc.add(table);
            
         } catch (Exception e) {

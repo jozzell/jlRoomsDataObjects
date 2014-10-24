@@ -151,6 +151,7 @@ public class bookingObj   implements Serializable  {
    ****************************************************
    */
   public Vector XXXgetEventAvalBooking(int sp, String path) {
+      htmlTable htmlTable = new htmlTable();
     htmlTableParm
         parm = new htmlTableParm(),
         edit = new htmlTableParm(),
@@ -200,6 +201,7 @@ public class bookingObj   implements Serializable  {
    ****************************************************
    */
   public Vector XXXgetAvalHotelBooking(int sp, int hotel) {
+      htmlTable htmlTable = new htmlTable();
     htmlTableParm parm = new htmlTableParm();
     Hashtable hash = this.getCurrBooking(sp);
     Vector v = new Vector();
@@ -241,6 +243,7 @@ public class bookingObj   implements Serializable  {
    ****************************************************
    */
   public String getPgBreak(String s, int cnt) {
+      htmlTable htmlTable = new htmlTable();
     htmlTableParm parm = new htmlTableParm();
     parm.setHeader(true);
     parm.setColumnSpan(cnt);
@@ -270,6 +273,7 @@ public class bookingObj   implements Serializable  {
   }
 
   public Vector XXXgetWizardHotel(int i) {
+      htmlTable htmlTable = new htmlTable();
     htmlTableParm parm = new htmlTableParm();
     Vector v = new Vector();
     Object obj[] = new Object[1];

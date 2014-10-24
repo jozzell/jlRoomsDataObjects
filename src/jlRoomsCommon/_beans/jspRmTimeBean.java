@@ -14,9 +14,7 @@ import obj.bean.time.jspTimeBean;
  */
 @ManagedBean(name = "jspRmTimeBean")
 public class jspRmTimeBean extends jspTimeBean implements Serializable{
-  public static void main(String[] args) {
-    jspTimeBean.getPickListDay(1);
-  }
+ 
   public jspRmTimeBean() {
   }
   public jspRmTimeBean(Date d, int i) {

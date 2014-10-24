@@ -18,6 +18,7 @@ import jlRoomsCommon._objects.jlRoomsDbConnIinterface;
 import jlRoomsCommon._objects.jlRoomsCommObjects;
 import jlRoomsCommon.customerPayment.db.customerPaymentObj;
 import jlRoomsDO.JlRoomsDataObjects;
+import jlRoomsDO.vendorObjTypesENum;
 import obj.db.v1.dbMgrInterface;
 
 
@@ -54,7 +55,8 @@ public class customerRmObj  implements Serializable{
     // *************************************************  
    // custRmBean = customerRmObj.getCustRoomBean(blockBean, custBean,JlRoomsDataObjects.getProcFee(this.sponsorBean,pickListType));
     public  custRmBean getCustRoomBean(blockBean bean, custBean cust,sponsorBean spon) {
-        return getCustRoomBean(bean, cust,JlRoomsDataObjects.getProcFee(spon,bean.getVendorType()));
+        double amt = vendorObjTypesENum.DEFAULT.getENUM(bean.getVendorType()).getProcFee(spon);
+        return getCustRoomBean(bean, cust,amt);
     }
     public custRmBean getCustRoomBean(blockBean bean, custBean cust,double fee) {
         
@@ -491,7 +493,7 @@ public class customerRmObj  implements Serializable{
     }
 
     public int update(custRmBean bean, dbMgrInterface db) {
-        bean.setDbTimeStamp(JlRoomsDataObjects.getTimeStampString());
+        bean.setDbTimeStamp((new JlRoomsDataObjects()).getTimeStampString());
         String sql = bean.getCustRoomId() == 0 ? customerRmSql.sqlInsertCustRoom(this.webID) : customerRmSql.sqlUpdateCustRoom(this.webID);
         try {
             db.updateDatabase(sql, getCutomerRoom(bean));

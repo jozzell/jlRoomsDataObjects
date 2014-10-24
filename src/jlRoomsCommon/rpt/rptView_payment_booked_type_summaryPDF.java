@@ -20,7 +20,7 @@ import sun.jdbc.rowset.CachedRowSet;
  */
 public class rptView_payment_booked_type_summaryPDF extends objMgr {
      public  double get_rptview_payment_type(Document doc, CachedRowSet cr, boolean brk, boolean comment) throws Exception {
-
+jlRoomsFactoryRpt jlRoomsFactoryRpt =  new jlRoomsFactoryRpt();
 
         double amt = 0, total = 0;
         try {

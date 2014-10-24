@@ -148,7 +148,7 @@ public class customerPaymentObj  implements Serializable{
             new Integer(bean.getLookupId()),
             bean.getComment() == null ? "" : bean.getComment(),
             bean.getNote() == null ? "" : bean.getNote(),
-            JlRoomsDataObjects.getDate(bean.getDbTimestamp()),
+            (new JlRoomsDataObjects()).getDate(bean.getDbTimestamp()),
             //new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()),
             new Integer(bean.getChkType())
         //new java.sql.Date( bean.getDbTimestamp().getTime())

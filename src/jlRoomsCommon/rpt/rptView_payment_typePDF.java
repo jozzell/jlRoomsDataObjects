@@ -25,6 +25,7 @@ public class rptView_payment_typePDF extends objMgr  {
         rptView_payment_typePDF(doc,cr,false);
     }
     public  void rptView_payment_typePDF(Document doc, CachedRowSet cr,boolean summeary) throws Exception {
+        jlRoomsFactoryRpt jlRoomsFactoryRpt =  new jlRoomsFactoryRpt();
         float[] widths = new float[]{0.20f, 0.20f, 0.15f, 0.30f, 0.15f};
         double amt = 0, tot = 0,amt2=0;
         PdfPTable table = new PdfPTable(widths);
@@ -112,7 +113,7 @@ public class rptView_payment_typePDF extends objMgr  {
             cell0.setPhrase(jlRoomsFactoryRpt.getRptFont(this.getDollarFormat(tot)));
             table.addCell(cell0);
             
-            JlRoomsDataObjects.docPgBreak(doc,null);
+            (new JlRoomsDataObjects()).docPgBreak(doc,null);
             doc.add(table);
 
         }

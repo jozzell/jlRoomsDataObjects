@@ -12,6 +12,7 @@ import jlRoomsCommon._beans.brwBookingSubBean;
 import jlRoomsCommon._objects.jlRoomsDbConnIinterface;
 import jlRoomsDO.JlRoomsDataObjects;
 import obj.db.v1.dbMgrInterface;
+import obj.reusableObj;
 import sun.jdbc.rowset.*;
 
 /**
@@ -128,7 +129,7 @@ public int updateBlock(blockBean b) {
 }
     public int updateBlock(blockBean b,dbMgrInterface db) {
         
-        b.setDB_TIMESTAMP(JlRoomsDataObjects.getTimeStampString());
+        b.setDB_TIMESTAMP((new JlRoomsDataObjects()).getTimeStampString());
         Object obj[];
         String sql ;
         try {
@@ -227,7 +228,7 @@ public int updateBlock(blockBean b) {
 // *************************************************************************
     private  double grabBookingCnt(int block,Hashtable hTable) {
         try {
-            return obj.reusableObj.round(((Double) hTable.get(new Integer(block))).doubleValue(), 1);
+            return (new reusableObj()).round(((Double) hTable.get(new Integer(block))).doubleValue(), 1);
 
         } catch (Exception e) {
             return 0.0;

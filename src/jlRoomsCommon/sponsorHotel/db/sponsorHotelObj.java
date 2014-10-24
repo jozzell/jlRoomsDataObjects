@@ -7,6 +7,7 @@ import jlRoomsCommon._beans.jsfCalendarBean;
 import jlRoomsCommon._beans.sponsorHotelBean;
 import jlRoomsCommon._objects.jlRoomsDbConnIinterface;
 import jlRoomsDO.JlRoomsDataObjects;
+import jlRoomsDO.vendorObjTypesENum;
 import obj.db.v1.dbMgrInterface;
 
 
@@ -206,8 +207,8 @@ public class sponsorHotelObj  implements Serializable{
       return  update(b,jlRoomsFactory);
   }
   public  int update(sponsorHotelBean b,dbMgrInterface db) {
-    if (b.getVendorType() == JlRoomsDataObjects.VENDOR_AIRLINES){
-        b.setCreated(JlRoomsDataObjects.getTimeStampString());
+    if (b.getVendorType() == vendorObjTypesENum.VENDOR_AIRLINES.getType()){
+        b.setCreated((new JlRoomsDataObjects()).getTimeStampString());
     } else {
         b.setCreated("00:00:00");
     }
@@ -232,7 +233,7 @@ public class sponsorHotelObj  implements Serializable{
   // ********************************************************
   
   private  Object[] getSponsorHotelObject(sponsorHotelBean b) {
-     
+     JlRoomsDataObjects JlRoomsDataObjects = new JlRoomsDataObjects();
     if (b.getSponsor_hotel_id() > 0) {
       return new Object[] {
           new Integer(b.getSponsor_id()),

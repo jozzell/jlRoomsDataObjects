@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import jlRoomsCommon.jlRoomsFactoryRpt;
 import jlRoomsCommon.objMgr;
 import jlRoomsDO.JlRoomsDataObjects;
+import obj.reusableObj;
 import sun.jdbc.rowset.CachedRowSet;
 
 /**
@@ -26,7 +27,7 @@ public class rptView_payment_booked_typePDF extends objMgr {
         float[] widths = {0.10f,  0.20f, .20f,.40f, 0.10f};
         PdfPTable table = new PdfPTable(widths);
         table.setWidthPercentage(100); // percentage
-        jlRoomsFactoryRpt.setRptHeaderCell(new String[]{"Date", "Category",  "Method", "Name/Vendor", "Total"}, table);
+        (new jlRoomsFactoryRpt()).setRptHeaderCell(new String[]{"Date", "Category",  "Method", "Name/Vendor", "Total"}, table);
         return table;
     }
         
@@ -51,6 +52,7 @@ public class rptView_payment_booked_typePDF extends objMgr {
             }
     }
     public  double rptviewPdfEvent(Document doc, CachedRowSet cr) throws Exception {
+        jlRoomsFactoryRpt jlRoomsFactoryRpt =  new jlRoomsFactoryRpt();
         if (true){
             return 0;
         }
@@ -77,7 +79,7 @@ public class rptView_payment_booked_typePDF extends objMgr {
             rght.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
             head.setBackgroundColor(Color.lightGray);
             head.setColspan(8);
-            
+            reusableObj reusableObj = new reusableObj();
             while (cr.next()) {
                 cLookup = cr.getInt(4);
                 cVen = (int)cr.getDouble(2);
@@ -101,16 +103,16 @@ public class rptView_payment_booked_typePDF extends objMgr {
                     cntr.setPhrase(jlRoomsFactoryRpt.getRptFont("" + cnt[0]));
                     table.addCell(cntr);
 
-                    cntr.setPhrase(jlRoomsFactoryRpt.getRptFont("" + obj.reusableObj.round(cnt[1], 1)));
+                    cntr.setPhrase(jlRoomsFactoryRpt.getRptFont("" + reusableObj.round(cnt[1], 1)));
                     table.addCell(cntr);
 
-                    cntr.setPhrase(jlRoomsFactoryRpt.getRptFont("" + obj.reusableObj.round(ccHold, 1)));
+                    cntr.setPhrase(jlRoomsFactoryRpt.getRptFont("" + reusableObj.round(ccHold, 1)));
                     table.addCell(cntr);
 
                     rght.setPhrase(jlRoomsFactoryRpt.getRptFont(this.getDollarFormat(amt[0])));
                     table.addCell(rght);
 
-                    cntr.setPhrase(jlRoomsFactoryRpt.getRptFont("" + obj.reusableObj.round(cCnt, 1)));
+                    cntr.setPhrase(jlRoomsFactoryRpt.getRptFont("" + reusableObj.round(cCnt, 1)));
                     table.addCell(cntr);
 
                     rght.setPhrase(jlRoomsFactoryRpt.getRptFont(this.getDollarFormat(amt[1])));
@@ -153,16 +155,16 @@ public class rptView_payment_booked_typePDF extends objMgr {
                     cntr.setPhrase(jlRoomsFactoryRpt.getRptFont("" + cnt[0]));
                     table.addCell(cntr);
 
-                    cntr.setPhrase(jlRoomsFactoryRpt.getRptFont("" + obj.reusableObj.round(cnt[1], 1)));
+                    cntr.setPhrase(jlRoomsFactoryRpt.getRptFont("" + reusableObj.round(cnt[1], 1)));
                     table.addCell(cntr);
 
-                    cntr.setPhrase(jlRoomsFactoryRpt.getRptFont("" + obj.reusableObj.round(ccHold, 1)));
+                    cntr.setPhrase(jlRoomsFactoryRpt.getRptFont("" + reusableObj.round(ccHold, 1)));
                     table.addCell(cntr);
 
                     rght.setPhrase(jlRoomsFactoryRpt.getRptFont(this.getDollarFormat(amt[0])));
                     table.addCell(rght);
 
-                     cntr.setPhrase(jlRoomsFactoryRpt.getRptFont("" + obj.reusableObj.round(cCnt, 1)));
+                     cntr.setPhrase(jlRoomsFactoryRpt.getRptFont("" + reusableObj.round(cCnt, 1)));
                     table.addCell(cntr);
 
                     rght.setPhrase(jlRoomsFactoryRpt.getRptFont(this.getDollarFormat(amt[1])));
@@ -189,7 +191,7 @@ public class rptView_payment_booked_typePDF extends objMgr {
              rght.setPhrase(jlRoomsFactoryRpt.getRptFont(this.getDollarFormat(gTot)));
              rght.setBackgroundColor(Color.lightGray);
              table.addCell(rght);
-            JlRoomsDataObjects.docPgBreak(doc,"Payment (Booked)");
+            (new JlRoomsDataObjects()).docPgBreak(doc,"Payment (Booked)");
             doc.add(table);
         } catch (Exception e) {
             throw e;

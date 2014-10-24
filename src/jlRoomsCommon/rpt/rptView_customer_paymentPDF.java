@@ -22,7 +22,7 @@ import sun.jdbc.rowset.CachedRowSet;
 public class rptView_customer_paymentPDF extends objMgr {
      public  void get_rptView_customer_payment(Document doc,CachedRowSet cr){
         
-        
+        jlRoomsFactoryRpt jlRoomsFactoryRpt =  new jlRoomsFactoryRpt();
         double amt=0,total=0;
         try {
             float[] widths = {0.17f, 0.23f,0.20f,0.20f,0.20f};
@@ -100,7 +100,7 @@ public class rptView_customer_paymentPDF extends objMgr {
                table.addCell(cell1);
 
             }
-            JlRoomsDataObjects.docPgBreak(doc,null);
+            (new JlRoomsDataObjects()).docPgBreak(doc,null);
             doc.add(table);
         } catch(Exception ex){
             Logger.getLogger(rptView_customer_payment.class.getName()).log(Level.SEVERE, null, ex);

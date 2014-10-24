@@ -42,7 +42,7 @@ public class pdfRptBean extends pdfRptBeanTypes implements Serializable{
     this.customer = cust;
     this.dateRange = date;
    }
- private int whereClauseType=rptFirstNightSql.WHERE_SPONSOR;
+ private int whereClauseType=0;
 
     public void setWhereClauseType(int whereClauseType) {
         this.whereClauseType = whereClauseType;

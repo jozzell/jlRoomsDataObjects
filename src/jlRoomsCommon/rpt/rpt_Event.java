@@ -14,6 +14,7 @@ import jlRoomsCommon._beans.custVendorPaymentBean;
 import jlRoomsCommon.rpt.db.sql.htmlPaymentCustVendorObj;
 import jlRoomsCommon.rpt.db.sql.htmlPaymentCustVendorSql;
 import obj.db.v1.dbMgrInterface;
+import obj.reusableObj;
 import sun.jdbc.rowset.CachedRowSet;
 
 /**
@@ -82,12 +83,13 @@ public class rpt_Event implements Serializable{
         List<rpt_EventPaymentDetailBookedBean> list = new ArrayList<rpt_EventPaymentDetailBookedBean>();
         amt = 0;
         try {
+            reusableObj reusableObj = new reusableObj();
             while (cr.next()) {
                 rpt_EventPaymentDetailBookedBean bean = new rpt_EventPaymentDetailBookedBean();
                 bean.setStatus(cr.getString(5));
                 bean.setDesc(cr.getString(6) + " " + cr.getString(7));
                 bean.setCost(cr.getDouble(1));
-                bean.setCnt(obj.reusableObj.round(cr.getDouble(10) / (cr.getDouble(8) ), 2));
+                bean.setCnt(reusableObj.round(cr.getDouble(10) / (cr.getDouble(8) ), 2));
                 bean.setDays(cr.getInt(3));
                 bean.setTotal(cr.getDouble(2));
                 amt += cr.getDouble(2);
