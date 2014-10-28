@@ -15,6 +15,7 @@ import jlRoomsCommon._beans.loginBean;
 import jlRoomsCommon._beans.vendorBean;
 //import  jlRoomsCommon._jlroot.serialsObj.checkDupCompany;
 import jlRoomsDO.JlRoomsDataObjects;
+import jlRoomsDO.jlBookingMgrEnum;
 import jlRoomsDO.vendorObjTypesENum;
 import obj.db.v1.dbMgrInterface;
 import sun.jdbc.rowset.CachedRowSet;
@@ -45,7 +46,7 @@ public class serialsCompanyObj {
     }
     // =====================================================================
     public  void setDefaultPaymentMethod(String key,dbMgrInterface db,boolean ok){
-        setPaymentMethod(key,3,vendorObjTypesENum.JLROOMS_TRYBUY,db, ok);
+        setPaymentMethod(key,3,jlBookingMgrEnum.JLROOMS_TRYBUY.getType(),db, ok);
     }
     public  void setPaymentMethod(String key,int day,int type,dbMgrInterface db,boolean ok){
          try {
@@ -91,7 +92,7 @@ public class serialsCompanyObj {
              setDefaultPaymentMethod(key,db,true);
              bean = new appCustPaymentMethond();
              bean.setCntr(3);
-             bean.setCntr_type(vendorObjTypesENum.JLROOMS_TRYBUY);
+             bean.setCntr_type(jlBookingMgrEnum.JLROOMS_TRYBUY.getType());
              bean.setDate("Payment Verification Method Needed");
          }
         return bean;

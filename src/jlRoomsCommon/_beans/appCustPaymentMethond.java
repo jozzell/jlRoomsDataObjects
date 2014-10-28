@@ -6,6 +6,7 @@ package jlRoomsCommon._beans;
 
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
+import jlRoomsDO.jlBookingMgrEnum;
 import jlRoomsDO.vendorObjTypesENum;
 
 /**
@@ -14,13 +15,15 @@ import jlRoomsDO.vendorObjTypesENum;
  */
 @ManagedBean(name = "appCustPaymentMethond")
 public class appCustPaymentMethond implements Serializable{
-     
+   final int JLROOMS_TRYBUY=1,
+            JLROOMS_EVENT=1,
+            JLROOMS_UNLIMITED=2;
     private String  
             _DISABLED_BROWSE_EVENT_PRINT = "true",
             _DISABLED_BROWSE_EVENT_NEXT = "true",
             _DISABLED_BROWSE_EVENT_ADD= "true";
     private int cntr_id=0;
-    private int cntr_type=vendorObjTypesENum.JLROOMS_TRYBUY;
+    private int cntr_type=jlBookingMgrEnum.JLROOMS_TRYBUY.getType();
     private int cntr=3;
     private String date="";
     //private int _JLROOMS_PAYMENT_TYPE=JLROOMS_TRYBUY;
@@ -37,13 +40,13 @@ public class appCustPaymentMethond implements Serializable{
     public String getExpDate(String siteId){
         
         switch (cntr_type){
-            case vendorObjTypesENum.JLROOMS_TRYBUY:
+            case JLROOMS_TRYBUY:
                 if (cntr_id > 0)  {
                     return "Site ID:"+siteId+" Expire: "+date;
                 } else {
                     return "Working demo";
                 }
-            case vendorObjTypesENum.JLROOMS_UNLIMITED:
+            case JLROOMS_UNLIMITED:
                 if (cntr <= 45) return "Site ID:"+siteId+" Expire: "+date;
                 break;
             
@@ -52,7 +55,7 @@ public class appCustPaymentMethond implements Serializable{
     }
     public void setEnableBrwEventAddFlag(int rowCnt){
          switch(cntr_type){
-             case vendorObjTypesENum.JLROOMS_TRYBUY:
+             case JLROOMS_TRYBUY:
                  _DISABLED_BROWSE_EVENT_PRINT = "true";
                  if (rowCnt >= 1){
                      _DISABLED_BROWSE_EVENT_ADD = "true";
@@ -66,7 +69,7 @@ public class appCustPaymentMethond implements Serializable{
                      _DISABLED_BROWSE_EVENT_NEXT = "false";
                  }
                  break;
-             case vendorObjTypesENum.JLROOMS_UNLIMITED:
+             case JLROOMS_UNLIMITED:
                 
                  if (this.cntr < 0){
                     _DISABLED_BROWSE_EVENT_ADD = "true";

@@ -39,9 +39,7 @@ public enum vendorObjTypesENum {
     VENDOR_BOAT(-15,"Boat Tickets","Boat","Boat","Boat");
     private int type;
     private String roomDesc, maintnaceType,costDesc,subRmDesc;
-    public static final int JLROOMS_TRYBUY=-1,
-            JLROOMS_EVENT=1,
-            JLROOMS_UNLIMITED=2;
+
     private vendorObjTypesENum(int type, String roomDesc, String maintnaceType,String costDesc,String subRmDesc) {
         this.type = type;
         this.roomDesc = roomDesc;
