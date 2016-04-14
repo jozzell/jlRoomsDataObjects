@@ -18,6 +18,7 @@ import jlRoomsCommon.objMgr;
 public class rptBeanColumesAmtList implements Serializable{
     private List<rptBeanColumes> rptList;
     private List<rptBeanColumesAmtList> rpt;
+     private double[] total;
     private double amt;
     private String header;
     private int id;
@@ -104,6 +105,20 @@ public class rptBeanColumesAmtList implements Serializable{
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the total
+     */
+    public double[] getTotal() {
+        return total;
+    }
+
+    /**
+     * @param total the total to set
+     */
+    public void setTotal(double[] total) {
+        this.total = total;
     }
 
     /**

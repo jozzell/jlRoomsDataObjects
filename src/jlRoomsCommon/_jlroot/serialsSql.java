@@ -14,7 +14,7 @@ public class serialsSql {
          sqlInsertLogin =
          " insert into jlRooms_CUSTOMER_login (DB_TIMESTAMP,srv_ip,keyStr) values (?,?,?) ",
          sqlSelectDBAccountSql= 
-         " select db_ID,jndi,url,jndi_user,jndi_pass,jndi_cnt "+                 
+         " select db_ID,jndi,url,jndi_user,jndi_pass,jndi_cnt,file_path "+                 
          " from jlRooms_dbaccount ",
         sqlSelectDBAccoutID =sqlSelectDBAccountSql+"  where db_id  = ?",
         sqlSelectDBAccount =sqlSelectDBAccountSql+

@@ -13,9 +13,10 @@ import javax.faces.bean.ManagedBean;
  */
 @ManagedBean(name = "userAccountBean")
 public class userAccountBean implements Serializable {
-    private String jndi = "jdbc/jlrooms"; // tomcat jndi = "java:comp/env/jdbc/jlrooms";
-    private String user = "jozzell";
-    private String pass = "cru$h",url;
+    private String jndi ="jdbc/jlroomsc_prod_001"; // "jdbc/jlrooms"; // tomcat jndi = "java:comp/env/jdbc/jlrooms";
+    private String user = "jlroomsc_jozzell";
+    private String pass = "cru$h947",url;
+    private String path = "C:/_bisc/_javaApps/jlData/jlr";
     private int id;
     
    
@@ -89,6 +90,20 @@ public class userAccountBean implements Serializable {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the path
+     */
+    public String getPath() {
+        return path;
+    }
+
+    /**
+     * @param path the path to set
+     */
+    public void setPath(String path) {
+        this.path = path;
     }
 
    

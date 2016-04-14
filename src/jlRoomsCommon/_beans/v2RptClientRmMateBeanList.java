@@ -19,8 +19,8 @@ public class v2RptClientRmMateBeanList implements Serializable{
     private String vendor;
     private String lookupDesc;
     private int custRmId;
-
    
+    
 
     /**
      * @return the desc
@@ -91,4 +91,6 @@ public class v2RptClientRmMateBeanList implements Serializable{
     public void setList(List<v2RptClientRmMateBean> list) {
         this.list = list;
     }
+
+    
 }

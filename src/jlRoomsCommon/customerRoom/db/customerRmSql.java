@@ -14,7 +14,7 @@ public class customerRmSql  extends objMgr {
             + " ,'y',v.vendor_type,    "
             + "   r.ROOMMATE_ID,r.TOTAL_COST,r.lookup_id,v.vendor_id,r.flt_id,b.sponsor_hotel_id,   "
             + "    s.NO_FEE_APPLYIED,s.service_charge,s.process_fee,s.HOTEL_FEE,r.block_cost_cnt, "
-            + " (select lookup_desc from lookup where lookup_id = r.lookup_id),r.NUM_DAYS ,s.dsp_str1"
+            + " (select lookup_desc from lookup where lookup_id = r.lookup_id),r.NUM_DAYS ,s.dsp_str1,ticket_info"
             + "    from customer_room r,vendor v ,block b,sponsor_hotel s "
             + "    where v.vendor_id = r.vendor_id and b.block_id = r.block_id and "
             + "   b.sponsor_hotel_id = s.sponsor_hotel_id   ";
@@ -154,8 +154,8 @@ public class customerRmSql  extends objMgr {
             + " (cust_id, block_id, eff_date, end_date, rm_cost,  "
             + " sponsor_id, cust_room_cnt, room_comment, balance_due_date, balance_comment,   "
             + " cust_room_type, room_paid ,ROOMMATE_SPLIT,ROOMMATE_ID,TOTAL_COST,NUM_DAYS,lookup_id,vendor_id,"
-            + " flt_id,DB_TIMESTAMP,block_cost_cnt,email_key) "
-            + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"+ this.getEMailKeyStr(web) + " )";
+            + " flt_id,DB_TIMESTAMP,block_cost_cnt,ticket_info,email_key) "
+            + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,"+ this.getEMailKeyStr(web) + " )";
         }
     }
     // *********************************************************    
@@ -166,7 +166,7 @@ public class customerRmSql  extends objMgr {
             + " cust_id=?, block_id=?, eff_date=?, end_date=?, rm_cost=?, "
             + " sponsor_id=?, cust_room_cnt=?, room_comment=?, balance_due_date=?, balance_comment=?,   "
             + " cust_room_type=?, room_paid=? ,ROOMMATE_SPLIT=?,ROOMMATE_ID=?,TOTAL_COST=?,NUM_DAYS=?, "
-            + " lookup_id = ?,block_cost_cnt = ? where cust_room_id=? "+(web == null ? "" :this.getEMailKeyEquals(web));
+            + " lookup_id = ?,block_cost_cnt = ?,ticket_info=? where cust_room_id=? "+(web == null ? "" :this.getEMailKeyEquals(web));
     }
 }
 

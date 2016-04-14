@@ -4,7 +4,7 @@
  */
 package jlRoomsCommon.rpt;
 
-import com.lowagie.text.Document;
+import com.itextpdf.text.Document;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.logging.Level;
@@ -157,12 +157,12 @@ public class rptView_customer_payment_summary implements Serializable {
      cell3 = new PdfPCell();
      cell2.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
      cell1.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
-     cell1.setBackgroundColor(Color.lightGray);
+     cell1.setBackgroundColor(BaseColor.LIGHT_GRAY);
 
      cell3.setPhrase(jlRoomsFactoryRpt.getRptFont("Total", true));
      cell3.setColspan(4);
      cell3.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
-     cell3.setBackgroundColor(Color.lightGray);
+     cell3.setBackgroundColor(BaseColor.LIGHT_GRAY);
      cr = rptView_customer_payment_summary(spon,web,db);
      while (cr.next()){
      curr = cr.getInt(2);

@@ -4,7 +4,12 @@
  */
 package jlRoomsCommon.rpt;
 
-import com.lowagie.text.Document;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.logging.Level;

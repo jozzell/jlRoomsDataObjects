@@ -55,7 +55,9 @@ public class sponsorSql extends objMgr {
       }
       
   }
+  
   private  final String
+          sql_sponsor_next_Demo = sql_sponsor+" and s.keyStr = ? and s.db_timestamp >= DATE_ADD(now(), INTERVAL -3 DAY)",
           sql_sponsor_next = sql_sponsor+" and s.keyStr = ?",
           sql_sponsor_seek = sql_sponsor+"  and upper(s.sponsor_desc) like upper(?) order by s.sponsor_desc",
           sql_getSponsor = sql_sponsor +"  and s.sponsor_id = ? ",
@@ -63,11 +65,15 @@ public class sponsorSql extends objMgr {
           sql_get_cust_sponsor_bean = sql_sponsor +" and s.sponsor_id in (select max(sponsor_id) from sponsor where cust_id = ?)"
           ;
  
-  public  String sql_sponsor_next(String web){
+  public  String sql_sponsor_next(String web,boolean demo){
       if (web == null){
           return sql_sponsor_next;
       } else {
-          return sql_sponsor_next+getWebID(web);
+          if (!demo){
+            return sql_sponsor_next+getWebID(web);
+          } else {
+              return sql_sponsor_next_Demo+getWebID(web);
+          }
       }
   }
   public  String sql_sponsor_seek(String web){

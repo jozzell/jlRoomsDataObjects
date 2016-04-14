@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jlRoomsCommon._beans;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.faces.bean.ManagedBean;
-import jlRoomsDO.JlRoomsDataObjects;
-import jlRoomsDO.vendorObjTypesENum;
+import jlRoomsCommon.JlRoomsDataObjects;
+import jlRoomsCommon.vendorObjTypesENum;
 import obj.reusableObj;
 /**
  *
@@ -31,18 +31,39 @@ private int custRoomId,custId,blockId,custRoomType,flag=0,roomPaid,loginId;
   private int vendorId;
   private int fltId;
   private int sponsorHotelId;
-  private String display1,display2,dspStr1;
+  private String display1,display2,dspStr1,ticket_info,effDateStr;
   public custRmBean() {
 
   }
+  public String backButton(){
+      if (this.custRoomId == 0) return "true";
+      return "false";
+              
+  }
+  public String getRptDateDisplay(){
+      if (dspStr1 != null && dspStr1.trim().length() > 0){
+          return dspStr1;
+      } else {
+          return effDateStr;
+      }
+      
+  }
   public String displayRmSplit(){
-     if (     vendorType == vendorObjTypesENum.VENDOR_HOTEL.getType() || 
-              vendorType == vendorObjTypesENum.VENDOR_CRUISES.getType() ||
+     if (     vendorType == vendorObjTypesENum.HOTEL.getType() || 
+              vendorType == vendorObjTypesENum.CRUISE.getType() ||
               vendorType == -18){
         return "true";
     }else {
         return "false";
     }
+  }
+  public String getSplitDisp(){
+      if (this.roommateSplit <= 1){
+          return "";
+         
+      } else {
+          return " (Split 1/"+roommateSplit+")";
+      }
   }
   public void setCustRmBean(custRmBean bean) {
     vendor = bean.getVendor();
@@ -158,6 +179,11 @@ private int custRoomId,custId,blockId,custRoomType,flag=0,roomPaid,loginId;
   }
   public void setEffDate(Date effDate) {
     this.effDate = effDate;
+    if (effDate != null){
+        effDateStr = (new SimpleDateFormat("EEE MMM dd yyyy hh:mm a")).format(effDate);
+    }  else {
+        effDateStr = "";
+    }
   }
   public void setDueComment(String dueComment) {
     this.dueComment = dueComment;
@@ -384,5 +410,19 @@ private int custRoomId,custId,blockId,custRoomType,flag=0,roomPaid,loginId;
      */
     public void setApplyProcFee(boolean applyProcFee) {
         this.applyProcFee = applyProcFee;
+    }
+
+    /**
+     * @return the ticket_info
+     */
+    public String getTicket_info() {
+        return ticket_info;
+    }
+
+    /**
+     * @param ticket_info the ticket_info to set
+     */
+    public void setTicket_info(String ticket_info) {
+        this.ticket_info = ticket_info;
     }
 }

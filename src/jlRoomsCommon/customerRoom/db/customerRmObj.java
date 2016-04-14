@@ -1,9 +1,7 @@
 package jlRoomsCommon.customerRoom.db;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import java.util.logging.Level;
@@ -15,10 +13,9 @@ import jlRoomsCommon._beans.custRmBean;
 import jlRoomsCommon._beans.roommateBean;
 import jlRoomsCommon._beans.sponsorBean;
 import jlRoomsCommon._objects.jlRoomsDbConnIinterface;
-import jlRoomsCommon._objects.jlRoomsCommObjects;
 import jlRoomsCommon.customerPayment.db.customerPaymentObj;
-import jlRoomsDO.JlRoomsDataObjects;
-import jlRoomsDO.vendorObjTypesENum;
+import jlRoomsCommon.JlRoomsDataObjects;
+import jlRoomsCommon.vendorObjTypesENum;
 import obj.db.v1.dbMgrInterface;
 
 
@@ -43,6 +40,7 @@ public class customerRmObj  implements Serializable{
         roommateSql = new roommateSql();
     }
     public customerRmObj(String x) {
+        customerRmSql = new customerRmSql();
         this.webID = x;
         roommateObj = new roommateObj(x);
         customerPaymentObj = new customerPaymentObj(x);
@@ -54,7 +52,7 @@ public class customerRmObj  implements Serializable{
     }
     // *************************************************  
    // custRmBean = customerRmObj.getCustRoomBean(blockBean, custBean,JlRoomsDataObjects.getProcFee(this.sponsorBean,pickListType));
-    public  custRmBean getCustRoomBean(blockBean bean, custBean cust,sponsorBean spon) {
+    public  custRmBean getCustRoomBean333(blockBean bean, custBean cust,sponsorBean spon) {
         double amt = vendorObjTypesENum.DEFAULT.getENUM(bean.getVendorType()).getProcFee(spon);
         return getCustRoomBean(bean, cust,amt);
     }
@@ -159,6 +157,7 @@ public class customerRmObj  implements Serializable{
             bean.setLookupDesc(rs.getString(30));
             bean.setDays(rs.getInt(31));
             bean.setDspStr1(rs.getString(32));
+            bean.setTicket_info(rs.getString(33));
            
         } catch (Exception e) {
             Logger.getLogger(customerRmObj.class.getName()).log(Level.SEVERE, null, e);
@@ -541,7 +540,8 @@ public class customerRmObj  implements Serializable{
                 new Integer(bean.getVendorId()),
                 new Integer(bean.getFltId()),
                 bean.getDbTimeStamp(),
-                new Double(bean.getBlockCostCnt())
+                new Double(bean.getBlockCostCnt()),
+                bean.getTicket_info()==null ? "": bean.getTicket_info(),
             };
 
         } else {
@@ -564,6 +564,7 @@ public class customerRmObj  implements Serializable{
                 new Integer(bean.getDays()),
                 new Integer(bean.getLookupId()),
                 new Double(bean.getBlockCostCnt()),
+                 bean.getTicket_info()==null ? "": bean.getTicket_info(),
                 new Integer(bean.getCustRoomId())
             };
         }

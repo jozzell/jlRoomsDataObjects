@@ -11,8 +11,8 @@ import java.util.logging.Logger;
 import jlRoomsCommon._beans.flightInfoBean;
 import jlRoomsCommon._objects.jlRoomsDbConnIinterface;
 import jlRoomsCommon.sponsorHotel.db.sponsorHotelSql;
-import jlRoomsDO.JlRoomsDataObjects;
-import jlRoomsDO.vendorObjTypesENum;
+import jlRoomsCommon.JlRoomsDataObjects;
+import jlRoomsCommon.vendorObjTypesENum;
 import obj.db.v1.dbMgrInterface;
 
 /**
@@ -23,12 +23,12 @@ import obj.db.v1.dbMgrInterface;
  * @version 1.0
  */
 public class flightObj  implements Serializable{
-    private sponsorHotelSql sponsorHotelSql;
+    private sponsorHotelSql sponsorHotelSql = new sponsorHotelSql();;
     private jlRoomsDbConnIinterface jlRoomsFactory;
     private String webID;
-    flightSql flightSql;
+    flightSql flightSql = new flightSql();
     private flightObj(){
-        sponsorHotelSql = new sponsorHotelSql();
+        
     }
 //    /sponsorHotelSql
     public flightObj(String web) {
@@ -75,6 +75,10 @@ public class flightObj  implements Serializable{
         return getFlightInfo(flightSql.sqlPickFligtWithConnSponHotelId(this.webID), new Object[]{new Integer(sponHotelId)});
     }
 // ********************************************************************
+    public List<flightInfoBean> sqlGetVendorFlights(int vendor,int spon,dbMgrInterface db) {
+        return getFlightInfo(flightSql.sqlGetVendorFlights(this.webID), new Object[]{vendor,spon},db);
+    }
+    // ********************************************************************
     public List<flightInfoBean> getFlightWithConnection(int fltId) {
         return getFlightInfo(flightSql.sqlPickFligtWithConn(this.webID), new Object[]{new Integer(fltId), new Integer(fltId)});
     }

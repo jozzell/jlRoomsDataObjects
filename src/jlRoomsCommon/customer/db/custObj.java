@@ -17,7 +17,7 @@ import sun.jdbc.rowset.*;
 public class custObj  implements Serializable {
 private jlRoomsDbConnIinterface jlRoomsFactory;
 private String webID=null;
-custSql custSql;
+custSql custSql = new custSql();
 serialsObj serialsObj;
 public custObj(){
     serialsObj = new serialsObj();
@@ -51,7 +51,7 @@ public  void updateCustomerEMail(int id,String eMail){
     try {
       db.updateDatabase(s,getCustomerBean(b));
       if(b.getCustId() == 0) {
-          b.setCustId(getLastCust(b.getFirstName(),b.getLastName(),db));
+         b.setCustId(getLastCust(b.getFirstName(),b.getLastName(),db));
          serialsBean serialsBean = serialsObj.updateCustomerKey(b.getCustId(), root,db,false);
          b.setKeyStr(serialsBean.getKey());
       }

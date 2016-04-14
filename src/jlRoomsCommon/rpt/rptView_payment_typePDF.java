@@ -4,13 +4,14 @@
  */
 package jlRoomsCommon.rpt;
 
-import com.lowagie.text.Document;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import java.awt.Color;
 import jlRoomsCommon.jlRoomsFactoryRpt;
 import jlRoomsCommon.objMgr;
-import jlRoomsDO.JlRoomsDataObjects;
+import jlRoomsCommon.JlRoomsDataObjects;
 import sun.jdbc.rowset.CachedRowSet;
 
 /**
@@ -48,9 +49,9 @@ public class rptView_payment_typePDF extends objMgr  {
         cell3.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
         cell1.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
         cell1.setColspan(4);
-        cell1.setBackgroundColor(Color.lightGray);
+        cell1.setBackgroundColor(BaseColor.LIGHT_GRAY);
         cell0.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
-        cell0.setBackgroundColor(Color.lightGray);
+        cell0.setBackgroundColor(BaseColor.LIGHT_GRAY);
         String str,type=null;
         int currType=-1,lastType=-1;
         while (cr.next()) {

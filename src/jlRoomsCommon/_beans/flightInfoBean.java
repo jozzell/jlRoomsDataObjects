@@ -6,6 +6,7 @@
 package jlRoomsCommon._beans;
 import java.io.Serializable;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
@@ -30,7 +31,7 @@ public class flightInfoBean implements Serializable{
   private int vendorType;
 
   private String created;
-
+  private SimpleDateFormat sdf;
   // public int getFlgIdRollup() {
     //Calendar cal = Calendar.getInstance();
    // return flgIdRollup;
@@ -38,6 +39,16 @@ public class flightInfoBean implements Serializable{
    public flightInfoBean() {
    
   }
+   private String getSdf(Date date){
+       if (sdf == null){
+           sdf = new SimpleDateFormat("EEE MMM dd yyyy hh:mm a");
+       }
+       
+       return sdf.format(date);
+   }
+   public String getFltArrivalDateString() {
+       return getSdf(getFltArrivalDate() );
+   }
   public Date getFltArrivalDate() {
       if (this.fltArrivalDate == null) return Calendar.getInstance().getTime();
     return fltArrivalDate;
@@ -47,6 +58,9 @@ public class flightInfoBean implements Serializable{
   }
   public String getFltComment() {
     return fltComment;
+  }
+  public String getFltDepartureDateString() {
+       return getSdf(getFltDepartureDate() );
   }
   public Date getFltDepartureDate() {
       if (this.fltDepartureDate == null) return Calendar.getInstance().getTime();

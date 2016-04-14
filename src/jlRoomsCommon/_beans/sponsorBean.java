@@ -17,7 +17,7 @@ public class sponsorBean implements Serializable{
   private String keyStr;
   private Date effDate, endDate,timeStamp;
   private int custId,sponsorId, region, vendorId, flagId, processFeeType,noFeeApplied;
-  private String sponsorDesc="jlRooms.com", invDesc, vendorName,html=null,comment;
+  private String sponsorDesc="New Event", invDesc, vendorName,html=null,comment;
   private double procFee, procFeeHotel, procFeeCar,
       procFeeAir,procBusFee,procBoatFee,
       procFeeTicket, procFeeCruise, procFeeTrain;

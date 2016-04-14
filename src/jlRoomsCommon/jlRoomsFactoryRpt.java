@@ -3,15 +3,20 @@ package jlRoomsCommon;
 import obj.pdf.pdfRptMgr;
 import java.io.*;
 //---WEB uncomment >>>>> import jlRooms.rpt.pdf.CustomerFlightEventOverViewPDF;
-import javax.swing.*;
-import com.lowagie.text.*;
-import com.lowagie.text.Font;
-import com.lowagie.text.pdf.*;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jlRoomsCommon._beans.*;
 //---WEB uncomment >>>>> import jlRooms.rpt.*;
 import java.util.Calendar;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 //---WEB uncomment >>>>> import jlRooms.jlRoomsFactory;
 //import jlRooms.jlRoomsFactory;
 //---WEB uncomment >>>>> import jlRooms.jlRoomsFactoryObj;
@@ -22,13 +27,13 @@ public class jlRoomsFactoryRpt extends pdfRptMgr {
     public  JFileChooser jFileChooser;
     public  final int iOffice = 1;
     public  final String loc = "c:\\Cell Widths.pdf", sPeaceeXXX = "";
-    private  HeaderFooter footer;
-    private  HeaderFooter header;
+    //private  HeaderFooter footer;
+    //private  HeaderFooter header;
     objMgr objMgr;
-    jlRoomsFactoryRpt jlRoomsFactoryRpt;
+    //jlRoomsFactoryRpt jlRoomsFactoryRpt;
     public jlRoomsFactoryRpt() {
         objMgr = new objMgr();
-        jlRoomsFactoryRpt = new jlRoomsFactoryRpt();
+        //jlRoomsFactoryRpt = new jlRoomsFactoryRpt();
         try {
             jbInit();
         } catch (Exception e) {
@@ -39,7 +44,7 @@ public class jlRoomsFactoryRpt extends pdfRptMgr {
 
     private void jbInit() throws Exception {
     }
-
+/*
     public  void setFooter(Document doc) {
         if (footer == null) {
             try {
@@ -73,12 +78,12 @@ public class jlRoomsFactoryRpt extends pdfRptMgr {
         doc.setFooter(footer);
 
     }
-
+*/
     public  void setDate(Document doc) throws Exception {
         Calendar.getInstance().getTime();
         Paragraph pg = new Paragraph(objMgr.getDateFormat(Calendar.getInstance().getTime()));
         pg.setAlignment(Paragraph.ALIGN_LEFT);
-        pg.setFont(FontFactory.getFont(FontFactory.HELVETICA, 8, Font.ITALIC));
+        pg.setFont(FontFactory.getFont(FontFactory.HELVETICA, 8, Font.BOLD));
 
         try {
             doc.add(pg);
@@ -174,7 +179,7 @@ public class jlRoomsFactoryRpt extends pdfRptMgr {
         try {
 
             PdfWriter.getInstance(document, new FileOutputStream(location));
-            jlRoomsFactoryRpt.setFooter(document);
+            //setFooter(document);
             document.open();
 
             //---WEB uncomment >>>>> CustomerEventOverViewPDF.getCustomerInfo(spon, cust, document);
@@ -211,7 +216,7 @@ public class jlRoomsFactoryRpt extends pdfRptMgr {
         try {
 
             PdfWriter.getInstance(document, new FileOutputStream(location));
-            jlRoomsFactoryRpt.setFooter(document);
+            //setFooter(document);
             document.open();
             //---WEB uncomment >>>>> jlRoomsFactoryObj.get_sponsorObj();
             sponsorBean sponsorBean; //---WEB uncomment >>>>>  = jlRoomsFactoryObj.get_sponsorObj().sponsorGetEvent(spon);
@@ -247,7 +252,7 @@ public class jlRoomsFactoryRpt extends pdfRptMgr {
         try {
 
             PdfWriter.getInstance(document, new FileOutputStream(location));
-            jlRoomsFactoryRpt.setFooter(document);
+            //setFooter(document);
             document.open();
             // rptFirstNightPDF.genSummaryRpt(1, spon, document, new rptFirstNightBean(false, 60),rptFirstNightSql.WHERE_SPONSOR);
             //  rptFirstNightPDF.genSummaryRpt(2, spon, document, new rptFirstNightBean(),rptFirstNightSql.WHERE_SPONSOR);
@@ -283,7 +288,7 @@ public class jlRoomsFactoryRpt extends pdfRptMgr {
 
 
             PdfWriter.getInstance(document, new FileOutputStream(location));
-            jlRoomsFactoryRpt.setFooter(document);
+            //setFooter(document);
 
             document.open();
 
@@ -397,7 +402,7 @@ public class jlRoomsFactoryRpt extends pdfRptMgr {
             getPdfFileName("demo.pdf", "");
 
             PdfWriter.getInstance(document, new FileOutputStream("c:\test.pdf"));
-            jlRoomsFactoryRpt.setFooter(document);
+            //setFooter(document);
             document.open();
             // rptFirstNightPDF.getSummaryOverviewRpt(1,spon,document,new rptFirstNightBean(),rptFirstNightSql.WHERE_SPONSOR);
             //rptFirstNightPDF.getSummaryOverviewRpt(3,spon,document,new rptFirstNightBean(),rptFirstNightSql.WHERE_SPONSOR);
@@ -435,10 +440,10 @@ public class jlRoomsFactoryRpt extends pdfRptMgr {
         Document document = new Document(PageSize.A4.rotate(), 20, 20, 20, 20);
         try {
             PdfWriter.getInstance(document, new FileOutputStream(str));
-            jlRoomsFactoryRpt.setFooter(document);
+            //setFooter(document);
             document.open();
             
-            jlRoomsFactoryRpt.getOffice(document);
+            getOffice(document);
             //---WEB uncomment >>>>> jlRooms.rpt.RoommateEventOverViewPDF.getRoommate(188, 1086, document);
             
         } catch (Exception e) {

@@ -4,7 +4,7 @@
  */
 package jlRoomsCommon.rpt;
 
-import com.lowagie.text.Document;
+import com.itextpdf.text.Document;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.logging.Level;

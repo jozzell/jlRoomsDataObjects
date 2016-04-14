@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import jlRoomsCommon._beans.blockBean;
 import jlRoomsCommon._beans.brwBookingSubBean;
 import jlRoomsCommon._objects.jlRoomsDbConnIinterface;
-import jlRoomsDO.JlRoomsDataObjects;
+import jlRoomsCommon.JlRoomsDataObjects;
 import obj.db.v1.dbMgrInterface;
 import obj.reusableObj;
 import sun.jdbc.rowset.*;
@@ -25,9 +25,9 @@ import sun.jdbc.rowset.*;
 public class blockObj implements Serializable{
     private jlRoomsDbConnIinterface jlRoomsFactory;
     private String webID=null;
-    blockSql blockSql;
+    blockSql blockSql = new blockSql();
      public blockObj(){
-         blockSql = new blockSql();
+         
      }
     public blockObj(jlRoomsDbConnIinterface x) {
         this();
@@ -37,7 +37,30 @@ public class blockObj implements Serializable{
        this();
         this.webID = x;
     }
+ public blockBean grabBlock(int spon,int lookup,int sponHotel,dbMgrInterface db) {
+        int i= -1;
+        blockBean blockBean = null;
+        CachedRowSet rs = null;
+        try {
+            rs = db.getCachedRowSet(blockSql.sqlGrabBlockId(this.webID), new Object[]{
+                        
+                        spon,
+                       lookup,
+                        sponHotel
+                    });
+            while (rs.next()) {
+                i= rs.getInt(1);
+            }
+            if (i>0) blockBean = getBlock(new Object[]{i}, db);
+        } catch (Exception e) {
+            Logger.getLogger(blockObj.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            db.closeCachedRowSet(rs);
+        }
 
+        return blockBean;
+    }
+ 
     public blockBean getBlock(int blk) {
         Object ary[] = new Object[1];
         ary[0] = new Integer(blk);
@@ -206,6 +229,9 @@ public int updateBlock(blockBean b) {
     // *************************************************************************
     public blockBean getBlock(Object[] ary) {
         return getBlock(ary,this.jlRoomsFactory);
+    }
+    public blockBean getBlock(int id, dbMgrInterface db){
+        return getBlock( new Object[]{id} , db);
     }
     public blockBean getBlock(Object[] ary,dbMgrInterface db) {
         blockBean bean = null;

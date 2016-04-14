@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 
 import jlRoomsCommon._beans.sponsorBean;
 import jlRoomsCommon._objects.jlRoomsDbConnIinterface;
-import jlRoomsDO.JlRoomsDataObjects;
+import jlRoomsCommon.JlRoomsDataObjects;
 import obj.db.v1.dbMgrInterface;
 
 import sun.jdbc.rowset.*;
@@ -42,10 +42,10 @@ public class sponsorObj  implements Serializable{
       this.webID = web;
   }
   // ==================================================================
-  public List<sponsorBean> genEventList(String key,dbMgrInterface x){
+  public List<sponsorBean> genEventList(String key,boolean demo,dbMgrInterface x){
      
      return getEventList( 
-              sponsorSql.sql_sponsor_next(this.webID),
+              sponsorSql.sql_sponsor_next(this.webID,demo),
               new Object[]{key},
               x);
   }
@@ -171,7 +171,7 @@ public class sponsorObj  implements Serializable{
      CachedRowSet rs = null;
      
      try {
-       rs = db.getCachedRowSet(sponsorSql.sql_sponsor_next(this.webID),new Object[]{key});
+       rs = db.getCachedRowSet(sponsorSql.sql_sponsor_next(this.webID,false),new Object[]{key});
        while(rs.next()){
           return getBean(rs).getSponsorId();
        }
@@ -205,9 +205,7 @@ public class sponsorObj  implements Serializable{
        return new Object[] {
            (new JlRoomsDataObjects()).getDate(b.getEffDate()),
            b.getSponsorDesc() == null ? "" : b.getSponsorDesc(),
-           (new JlRoomsDataObjects()).getDate(b.getEndDate()),
-           new Integer(b.getFlagId()),
-           new Double(b.getProcFee()),
+           (new JlRoomsDataObjects()).getDate(b.getEndDate()), b.getFlagId(), b.getProcFee(),
            new Double(b.getProcFeeHotel()),
            new Double(b.getProcFeeCar()),
            new Double(b.getProcFeeAir()),
@@ -275,16 +273,16 @@ public class sponsorObj  implements Serializable{
    ************************************************************
    */
 public  sponsorBean sponsorGetEvent(int id) throws Exception {
-    return sponsorGetEvent(id,jlRoomsFactory);
+    return sponsorGetEvent(id,this.webID,jlRoomsFactory);
 }
-  public  sponsorBean sponsorGetEvent(int id,dbMgrInterface db) throws Exception {
+  public  sponsorBean sponsorGetEvent(int id,String key,dbMgrInterface db) throws Exception {
     sponsorBean bean = new sponsorBean();
     CachedRowSet rs = null;
 
 
     try {
       rs = db.getCachedRowSet(
-            sponsorSql.sql_getSponsor(this.webID), new Object[] {new Integer(id)});
+            sponsorSql.sql_getSponsor(key), new Object[] {new Integer(id)});
 
       while (rs.next()) bean = getBean(rs);
     }

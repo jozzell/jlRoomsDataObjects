@@ -3,6 +3,7 @@ package jlRoomsCommon._beans;
 
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
+import jlRoomsCommon.vendorObjTypesENum;
 
 /**
  *
@@ -10,6 +11,7 @@ import javax.faces.bean.ManagedBean;
  */
 @ManagedBean(name = "rptItineraryBean")
 public class rptItineraryBean implements Serializable{
+    private vendorObjTypesENum vendorObjTypesENum;
     private String effDate;
     private String endDate;
     private double rmCost;
@@ -46,7 +48,7 @@ public class rptItineraryBean implements Serializable{
     private String fltDepDate;
     private String fltDepTime;
     private String fltDepPlace;
-    private String vendorTypeDesc;
+    private String vendorTypeDesc,ticketInfo;
     private int id;
     /**
      * @return the effDate
@@ -66,6 +68,7 @@ public class rptItineraryBean implements Serializable{
      * @return the endDate
      */
     public String getEndDate() {
+        if (endDate ==  null) return this.effDate;
         return endDate;
     }
 
@@ -146,9 +149,7 @@ public class rptItineraryBean implements Serializable{
         this.balanceComment = balanceComment;
     }
 
-    /**
-     * @return the roommdateSplit
-     */
+    // ==============================================================
     public int getRoommdateSplit() {
         return roommdateSplit;
     }
@@ -159,7 +160,14 @@ public class rptItineraryBean implements Serializable{
     public void setRoommdateSplit(int roommdateSplit) {
         this.roommdateSplit = roommdateSplit;
     }
-
+    public String split(){
+        if (roommdateSplit <=1){
+            return "";
+        } else {
+           return " (split 1/"+ roommdateSplit+")";
+        }
+    }
+    // ==============================================================
     /**
      * @return the vendorName
      */
@@ -416,6 +424,7 @@ public class rptItineraryBean implements Serializable{
      * @return the days
      */
     public int getDays() {
+        if (days <= 0) return 1;
         return days;
     }
 
@@ -578,6 +587,30 @@ public class rptItineraryBean implements Serializable{
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the vendorObjTypesENum
+     */
+    public vendorObjTypesENum getVendorObjTypesENum() {
+        if (vendorObjTypesENum == null){
+            vendorObjTypesENum = vendorObjTypesENum.DEFAULT.getENUM(this.vendorType);
+        }
+        return vendorObjTypesENum;
+    }
+
+    /**
+     * @return the ticketInfo
+     */
+    public String getTicketInfo() {
+        return ticketInfo;
+    }
+
+    /**
+     * @param ticketInfo the ticketInfo to set
+     */
+    public void setTicketInfo(String ticketInfo) {
+        this.ticketInfo = ticketInfo;
     }
 
 }

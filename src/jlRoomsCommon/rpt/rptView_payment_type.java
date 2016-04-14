@@ -4,7 +4,10 @@
  */
 package jlRoomsCommon.rpt;
 
-import com.lowagie.text.Document;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;

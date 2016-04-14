@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import jlRoomsCommon._beans.custPaymentBean;
 import jlRoomsCommon._beans.custRmBean;
 import jlRoomsCommon._objects.jlRoomsDbConnIinterface;
-import jlRoomsDO.JlRoomsDataObjects;
+import jlRoomsCommon.JlRoomsDataObjects;
 import obj.db.v1.dbMgrInterface;
 
 import sun.jdbc.rowset.*;
@@ -20,13 +20,14 @@ import sun.jdbc.rowset.*;
  * @version 1.0
  */
 public class customerPaymentObj  implements Serializable{
-    customerPaymentSql customerPaymentSql;
+    customerPaymentSql customerPaymentSql  = new customerPaymentSql();
     private jlRoomsDbConnIinterface jlRoomsFactory;
     private String webID = null;
     public customerPaymentObj(){
-        customerPaymentSql = new customerPaymentSql();
+       
     }
     public customerPaymentObj(String x) {
+        
         this.webID = x;
     }
 

@@ -45,11 +45,11 @@ public class lookupObj  implements Serializable {
         if (bean.getLookupId() == 0) {
             sql = lookupSql.sqlInsert(this.webID);
             obj = new Object[]{
-                        new Integer(bean.getLookupType()),
-                        new Integer(bean.getLookupRollupId()),
+                bean.getLookupType(), 
+                bean.getLookupRollupId(),
                         bean.getDesc(),
-                        new Integer(bean.getFlag())
-                    };
+                        bean.getFlag(),
+                        bean.getVendor_id()};
         } else {
             sql = lookupSql.sqlUpdate(this.webID);
             obj = new Object[]{
@@ -59,6 +59,7 @@ public class lookupObj  implements Serializable {
                     };
 
         }
+
         try {
             dbMgr.updateDatabase(sql, obj);
         } catch (Exception e) {
@@ -69,15 +70,29 @@ public class lookupObj  implements Serializable {
     public List<lookupBean> getLookupTypeRollupList(int type, int rollup) {
         return getLookupTypeRollupList(type,rollup,jlRoomsFactory);
     }
+    
     public List<lookupBean> getLookupTypeRollupList(int type, int rollup,dbMgrInterface dbMgr) {
-        return getLookup(lookupSql.sqlLookupTypeRollup(this.webID), new Object[]{new Integer(type), new Integer(rollup),},dbMgr);
+        return getLookup(lookupSql.sqlLookupTypeRollup(this.webID), new Object[]{type, rollup},dbMgr);
+    }
+    public List<lookupBean> getLookupTypeRollupList(int type, int rollup,int vendor_id,dbMgrInterface dbMgr) {
+        return getLookup(lookupSql.sqlLookupTypeRollup(this.webID), new Object[]{type, rollup,vendor_id,},dbMgr);
     }
     // ******************************************************************************
     public List<lookupBean> getLookupRollupList(int rollup) {
         return getLookupRollupList(rollup,jlRoomsFactory);
     }
+    
     public List<lookupBean> getLookupRollupList(int rollup,dbMgrInterface dbMgr) {
-        return getLookup(lookupSql.sqlLookupRollup(this.webID), new Object[]{new Integer(rollup)},dbMgr);
+        return getLookup(lookupSql.sqlLookupRollup(this.webID), new Object[]{rollup},dbMgr);
+    }
+    public List<lookupBean> getLookupRollupListBlock(int rollup,int vendor_id,int flt,dbMgrInterface dbMgr) {
+        return getLookup(lookupSql.sqlLookupRollupBlock(this.webID), new Object[]{rollup,rollup,vendor_id,flt},dbMgr);
+    }
+    public List<lookupBean> sqlLookupRollupVendor(int rollup,int vendor,dbMgrInterface dbMgr) {
+        return getLookup(lookupSql.sqlLookupRollupVendor(this.webID), new Object[]{rollup,vendor},dbMgr);
+    }
+    public List<lookupBean> sqlLookupRollupVendorBlock(int rollup,int vendor,int flt,dbMgrInterface dbMgr) {
+        return getLookup(lookupSql.sqlLookupRollupVendorBlock(this.webID), new Object[]{rollup,vendor,rollup,vendor,flt},dbMgr);
     }
     // ******************************************************************************
     public List<lookupBean> getLookupTypeList(int type) {
@@ -166,6 +181,10 @@ public class lookupObj  implements Serializable {
             bean.setFlag(rs.getInt(5));
             bean.setSign(rs.getInt(6));
             bean.setRegion(rs.getInt(7));
+            bean.setBlock_id(rs.getInt(8));
+            bean.setRmCnt(rs.getDouble(9));
+            bean.setBookedCnt(rs.getDouble(10));
+            bean.setRmCost(rs.getDouble(11));
         } catch (Exception e) {
             e.printStackTrace();
         }

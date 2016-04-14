@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jlRoomsDO;
+package jlRoomsCommon;
 
 import jlRoomsCommon._beans.sponsorBean;
 
@@ -11,41 +11,48 @@ import jlRoomsCommon._beans.sponsorBean;
  * @author lmeans
  */
 public enum vendorObjTypesENum {
-    BUS(-14, "Bus Tickets", "Tickeets","Cost","Bus"),
-    VENDOR_BUS(-14,"Bus Tickets", "Tickeets","Cost","Bus"),
+    BUS(-14, "Bus Tickets", "Tickeets","Cost","Bus","Bus Route"),
+    //VENDOR_BUS(-14,"Bus Tickets", "Tickeets","Cost","Bus","Bus Route"),
     
-    RAILROAD(-32, "RailRoad Tickets", "Seat Class","Cost","Train"),
-    VENDOR_RAILROAD(-32,"RailRoad Tickets", "Seat Class","Cost","Train"),
+    RAILROAD(-32, "RailRoad Tickets", "Seat Class","Cost","Train #","Train Route"),
+    //VENDOR_RAILROAD(-32,"RailRoad Tickets", "Seat Class","Cost","Train","Train Route"),
     
-    CRUISE(-31, "Cruise Cabins", "Cabin Size","Cost","Boat"),
-    VENDOR_CRUISES(-31,"Cruise Cabins", "Cabin Size","Cost","Boat"),
+    CRUISE(-31, "Cruise Cabins", "Cabin Size","Cost","Cruise Shipname","Cruise"),
+    //VENDOR_CRUISES(-31,"Cruise Cabins", "Cabin Size","Cost","Cruise","Cruise"),
     
-    AIRLINE(-12, "AirLine Tickets", "Seat Class","Cost","Flight"),
-    VENDOR_AIRLINES(-12,"AirLine Tickets", "Seat Class","Cost","Flight"),
+    AIRLINE(-12, "AirLine Tickets", "Seat Class","Cost","Flight #","Flight"),
+    //VENDOR_AIRLINES(-12,"AirLine Tickets", "Seat Class","Cost","Flight","Flight"),
     
-    TICKETS(33, "Tickets", "Section/Location","Cost","Tickets"),
-    VENDOR_TICKETS(33,"Tickets","Tickets","Tickets","Tickets"),
+    TICKETS(-33, "Tickets", "Section/Location","Cost","Tickets","Tickets to Purchase "),
+    //VENDOR_TICKETS(-33,"Tickets","Tickets","Tickets","Tickets","tickets to purchase "),
     
-    CARRENTAL(-13, "Cars Rentals", "Car Size","Cost/Day",""),
-    VENDOR_CAR_RENTAL(-13,"Cars Rentals", "Car Size","Cost/Day",""),
     
-    HOTEL(-2, "Hotel Rooms", "Room Type","Cost/Night",""),
-    VENDOR_HOTEL(-2,"Hotel Rooms", "Room Type","Cost/Night",""),
+    merchandise(-34, "Merchandise", "Merchandise","Cost","Merchandise","Merchandise to purchase"),
+    //merchandise_TICKETS(-34,"Merchandise","Merchandise","Merchandise","Merchandise","Merchandise to purchase"),
     
-    SPONDOR(-3, "", "","Cost",""),
-    VENDOR_SPONSOR(-3,"Tickets","Tickets","Tickets",""),
-    DEFAULT(0, "Category", "Category","Cost",""),
     
-    VENDOR_BOAT(-15,"Boat Tickets","Boat","Boat","Boat");
-    private int type;
-    private String roomDesc, maintnaceType,costDesc,subRmDesc;
+    
+    CARRENTAL(-13, "Cars Rentals", "Car Size","Cost/Day","","Cars Rentals"),
+    //VENDOR_CAR_RENTAL(-13,"Cars Rentals", "Car Size","Cost/Day","","Cars Rentals"),
+    
+    HOTEL(-2, "Hotel Rooms", "Room Type","Cost/Night","Rooms","Hotel Rooms"),
+    //VENDOR_HOTEL(-2,"Hotel Rooms", "Room Type","Cost/Night","","Hotel Rooms"),
+    
+    SPONDOR(-3, "", "","Cost","",""),
+    //VENDOR_SPONSOR(-3,"Tickets","Tickets","Tickets","",""),
+    DEFAULT(0, "Category", "Category","Cost","",""),
+    
+    VENDOR_BOAT(-15,"Boat Tickets","Boat","Boat","Boat","Boats");
+    private final int type;
+    private final String roomDesc, maintnaceType,costDesc,subRmDesc,header;
 
-    private vendorObjTypesENum(int type, String roomDesc, String maintnaceType,String costDesc,String subRmDesc) {
+    private vendorObjTypesENum(int type, String roomDesc, String maintnaceType,String costDesc,String subRmDesc,String hdr) {
         this.type = type;
         this.roomDesc = roomDesc;
         this.maintnaceType = maintnaceType;
         this.costDesc = costDesc;
         this.subRmDesc = subRmDesc;
+        this.header = hdr;
         
     }
 
@@ -82,6 +89,10 @@ public enum vendorObjTypesENum {
                 return TICKETS; //VENDOR_TICKETS = -33,
             case -13:
                 return CARRENTAL; //VENDOR_CAR_RENTAL = -13,
+            case -34:
+                return merchandise;
+                case -2:
+                return HOTEL;
             default:
                 return HOTEL;//VENDOR_HOTEL = -2,
             }
@@ -117,26 +128,26 @@ public enum vendorObjTypesENum {
         return subRmDesc;
     }
     public boolean checkFlt(int vendor_type){
-        return vendor_type == VENDOR_AIRLINES.getType() || 
-                vendor_type == VENDOR_RAILROAD.getType() || 
-                vendor_type == VENDOR_BUS.getType() || 
+        return vendor_type == AIRLINE.getType() || 
+                vendor_type == RAILROAD.getType() || 
+                vendor_type == BUS.getType() || 
                 vendor_type == VENDOR_BOAT.getType();
     }
     public double getProcFee(sponsorBean b) {
         double amt = 0;
-        if (this == VENDOR_HOTEL){
+        if (this == HOTEL){
             amt = b.getProcFeeHotel();
-        } else if (this == VENDOR_CAR_RENTAL){
+        } else if (this == CARRENTAL){
              amt = b.getProcFeeCar();
-        } else if (this == VENDOR_TICKETS){
+        } else if (this == TICKETS){
             amt = b.getProcFeeTicket();
-        } else if (this == VENDOR_AIRLINES){
+        } else if (this == AIRLINE){
             amt = b.getProcFeeAir();
-        } else if (this == VENDOR_CRUISES){
+        } else if (this == CRUISE){
             amt = b.getProcFeeCruise();
-        } else if (this == VENDOR_RAILROAD){
+        } else if (this == RAILROAD){
              amt = b.getProcFeeTrain();
-        } else if (this ==VENDOR_BUS){
+        } else if (this ==BUS){
             amt = b.getProcBusFee();
         } else if (this == VENDOR_BOAT){
             amt = b.getProcBoatFee();
@@ -148,6 +159,13 @@ public enum vendorObjTypesENum {
             amt = b.getProcFee();
         }
         return amt * -1;
+    }
+
+    /**
+     * @return the header
+     */
+    public String getHeader() {
+        return header;
     }
 }
 /*

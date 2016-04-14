@@ -6,8 +6,8 @@ import java.util.logging.Logger;
 import jlRoomsCommon._beans.jsfCalendarBean;
 import jlRoomsCommon._beans.sponsorHotelBean;
 import jlRoomsCommon._objects.jlRoomsDbConnIinterface;
-import jlRoomsDO.JlRoomsDataObjects;
-import jlRoomsDO.vendorObjTypesENum;
+import jlRoomsCommon.JlRoomsDataObjects;
+import jlRoomsCommon.vendorObjTypesENum;
 import obj.db.v1.dbMgrInterface;
 
 
@@ -15,9 +15,9 @@ import sun.jdbc.rowset.*;
 public class sponsorHotelObj  implements Serializable{
     private jlRoomsDbConnIinterface jlRoomsFactory;
     private String webID=null;
-    private sponsorHotelSql sponsorHotelSql;
+    private sponsorHotelSql  sponsorHotelSql = new sponsorHotelSql();;
     public sponsorHotelObj(){
-        sponsorHotelSql = new sponsorHotelSql();
+       
     }
   public sponsorHotelObj(String web){
       this();
@@ -173,7 +173,7 @@ public class sponsorHotelObj  implements Serializable{
    CachedRowSet rs = null;
    try {
      rs = db.getCachedRowSet(
-          sponsorHotelSql.sqlGetSponsorHotel(this.webID),new Object[]{new Integer(id)});
+          sponsorHotelSql.sqlGetSponsorHotel(this.webID),new Object[]{id});
      while(rs.next())return getSponsorHotelBean(rs);
    } catch(Exception e) {
      Logger.getLogger(sponsorHotelObj.class.getName()).log(Level.SEVERE, null, e);
@@ -207,7 +207,7 @@ public class sponsorHotelObj  implements Serializable{
       return  update(b,jlRoomsFactory);
   }
   public  int update(sponsorHotelBean b,dbMgrInterface db) {
-    if (b.getVendorType() == vendorObjTypesENum.VENDOR_AIRLINES.getType()){
+    if (b.getVendorType() == vendorObjTypesENum.AIRLINE.getType()){
         b.setCreated((new JlRoomsDataObjects()).getTimeStampString());
     } else {
         b.setCreated("00:00:00");

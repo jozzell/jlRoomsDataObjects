@@ -76,7 +76,9 @@ public class flightSql extends objMgr{
         return sqlColumnSub(web) + " and f.sponsor_hotel_id=? order by f.flt_departure_date,f.flt_departure_time";
     }
     
-    
+    public  String sqlGetVendorFlights(String web) {
+        return sqlColumnSub(web) + " and v.vendor_id=? and f.sponsor_id =? order by f.flt_departure_date,f.flt_departure_time";
+    }
     
     
     

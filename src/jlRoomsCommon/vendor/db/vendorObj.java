@@ -5,7 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jlRoomsCommon._beans.vendorBean;
 import jlRoomsCommon._objects.jlRoomsDbConnIinterface;
-import jlRoomsDO.vendorObjTypesENum;
+import jlRoomsCommon.vendorObjTypesENum;
 
 import obj.db.v1.dbMgrInterface;
 
@@ -14,17 +14,17 @@ import sun.jdbc.rowset.*;
 public class vendorObj  implements Serializable{
     private jlRoomsDbConnIinterface jlRoomsFactory;
     private String WebID=null;
-    final private vendorSql vendorSql;
+    final private vendorSql vendorSql = new vendorSql();;
      public vendorObj(){
-        this.vendorSql = new vendorSql();
+       
         
     }
   public vendorObj(jlRoomsDbConnIinterface x) {
-        this.vendorSql = new vendorSql();
+       
       this.jlRoomsFactory = x;
   }
   public vendorObj(String id) {
-        this.vendorSql = new vendorSql();
+       
       this.WebID = id;
   }
   // ------------------------------------- dbMgrInterface obj
@@ -36,7 +36,7 @@ public class vendorObj  implements Serializable{
     
         rs = mgr.getCachedRowSet(vendorSql.sqlGetDefaultID,
                 new Object[] {
-                    vendorObjTypesENum.VENDOR_SPONSOR.getType(),
+                    vendorObjTypesENum.SPONDOR.getType(),
                     key,
                     id});
         while (rs.next()){

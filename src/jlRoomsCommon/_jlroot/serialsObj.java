@@ -42,6 +42,7 @@ public class serialsObj {
                bean.setUrl(rs.getString(3));
                bean.setUser(rs.getString(4));
                bean.setPass(rs.getString(5));
+               bean.setPath(rs.getString(7));
            }
        } catch (Exception ex) {
            Logger.getLogger(serialsObj.class.getName()).log(Level.SEVERE, null, ex);

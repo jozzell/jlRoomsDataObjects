@@ -4,13 +4,14 @@
  */
 package jlRoomsCommon.rpt;
 
-import com.lowagie.text.Document;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import java.awt.Color;
 import jlRoomsCommon.jlRoomsFactoryRpt;
 import jlRoomsCommon.objMgr;
-import jlRoomsDO.JlRoomsDataObjects;
+import jlRoomsCommon.JlRoomsDataObjects;
 import sun.jdbc.rowset.CachedRowSet;
 
 /**
@@ -37,8 +38,8 @@ public class rptView_vendor_payment_summaryPDF extends objMgr {
             totCell.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
             amtCell.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
             cellAmt.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
-            totCell.setBackgroundColor(Color.lightGray);
-            amtCell.setBackgroundColor(Color.lightGray);
+            totCell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            amtCell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 
             totCell.setColspan(widths.length -1);
             jlRoomsFactoryRpt.setRptHeaderCell(new String[]{"1st", "Last", "Vendor", "Desc","Amount"}, table);

@@ -4,15 +4,15 @@
  */
 package jlRoomsCommon.rpt;
 
-import com.lowagie.text.Document;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-import java.awt.Color;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jlRoomsCommon.jlRoomsFactoryRpt;
 import jlRoomsCommon.objMgr;
-import jlRoomsDO.JlRoomsDataObjects;
+import jlRoomsCommon.JlRoomsDataObjects;
 import sun.jdbc.rowset.CachedRowSet;
 
 /**
@@ -40,12 +40,13 @@ public class rptView_customer_paymentPDF extends objMgr {
                     cell3 = new PdfPCell();
             cell2.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
             cell1.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
-            cell1.setBackgroundColor(Color.lightGray);
+            cell1.setBackgroundColor(BaseColor.LIGHT_GRAY);
+           
 
             cell3.setPhrase(jlRoomsFactoryRpt.getRptFont("Total", true));
             cell3.setColspan(4);
             cell3.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
-            cell3.setBackgroundColor(Color.lightGray);
+            cell3.setBackgroundColor(BaseColor.LIGHT_GRAY);
             
             
             jlRoomsFactoryRpt.setRptHeaderCell(new String[] {"Date", "Name","Desc","Booking", "Amount"}, table);

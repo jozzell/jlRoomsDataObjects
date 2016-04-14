@@ -6,8 +6,8 @@ package jlRoomsCommon._beans;
 
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import jlRoomsDO.jlBookingMgrEnum;
-import jlRoomsDO.vendorObjTypesENum;
+import jlRoomsCommon.jlBookingMgrEnum;
+import jlRoomsCommon.vendorObjTypesENum;
 
 /**
  * assistant

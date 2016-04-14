@@ -15,12 +15,16 @@ import javax.faces.bean.ManagedBean;
  */
 @ManagedBean(name = "lookupBean")
 public class lookupBean implements Serializable {
-private int region,LOOKUP_ID,LOOKUP_TYPE,LOOKUP_ROLLUP_ID,FLAG_IND,CREDIT;
+private int region,LOOKUP_ID,LOOKUP_TYPE,LOOKUP_ROLLUP_ID,FLAG_IND,CREDIT,vendor_id;
   private String LOOKUP_DESC,miscDesc,rptDesc;
   private String maintScreenDisplay=null;
   private Date date,endDate;
+  private int block_id;
+  double bookedCnt,rmCnt;
+    private double rmCost;
   public lookupBean() {
   }
+  
   public lookupBean(String desc,int value) {
       this.LOOKUP_DESC = desc;
       this.LOOKUP_ID = value;
@@ -29,6 +33,22 @@ private int region,LOOKUP_ID,LOOKUP_TYPE,LOOKUP_ROLLUP_ID,FLAG_IND,CREDIT;
       this.LOOKUP_DESC = desc;
       this.LOOKUP_ID = value;
       this.miscDesc = misc;
+  }
+  public String getNewBlockDesc(){
+      if (this.block_id == 0) return " [New Reserve Block]";
+      return "";
+  }
+  public double getCntZero(){
+      if (getCnt() <0) return 0;
+      return getCnt();
+  }
+  public double getCnt(){
+      return this.rmCnt - this.bookedCnt;
+  }
+  public String renderBlock(){
+      if (block_id > 0) return "true";
+      return "false";
+              
   }
   public String getEnabledFlag(){
       if (this.FLAG_IND >= 1){
@@ -53,6 +73,10 @@ private int region,LOOKUP_ID,LOOKUP_TYPE,LOOKUP_ROLLUP_ID,FLAG_IND,CREDIT;
   */
   public void setLookupId(int i) {
     LOOKUP_ID = i;
+  }
+  public int getLookupId(boolean ok){
+     if (LOOKUP_ID < 0) LOOKUP_ID = LOOKUP_ID * -1;
+     return LOOKUP_ID;
   }
   public int getLookupId() {
     return LOOKUP_ID;
@@ -181,5 +205,75 @@ private int region,LOOKUP_ID,LOOKUP_TYPE,LOOKUP_ROLLUP_ID,FLAG_IND,CREDIT;
      */
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    /**
+     * @return the vendor_id
+     */
+    public int getVendor_id() {
+        return vendor_id;
+    }
+
+    /**
+     * @param vendor_id the vendor_id to set
+     */
+    public void setVendor_id(int vendor_id) {
+        this.vendor_id = vendor_id;
+    }
+
+    /**
+     * @return the block_id
+     */
+    public int getBlock_id() {
+        return block_id;
+    }
+
+    /**
+     * @param block_id the block_id to set
+     */
+    public void setBlock_id(int block_id) {
+        this.block_id = block_id;
+    }
+
+    /**
+     * @return the rmCnt
+     */
+    public double getRmCnt() {
+        return rmCnt;
+    }
+
+    /**
+     * @param rmCnt the rmCnt to set
+     */
+    public void setRmCnt(double rmCnt) {
+        this.rmCnt = rmCnt;
+    }
+
+    /**
+     * @return the bookedCnt
+     */
+    public double getBookedCnt() {
+        return bookedCnt;
+    }
+
+    /**
+     * @param bookedCnt the bookedCnt to set
+     */
+    public void setBookedCnt(double bookedCnt) {
+        this.bookedCnt = bookedCnt;
+    }
+
+    /**
+     * @return the rmCost
+     */
+    public double getRmCost() {
+        return rmCost;
+    }
+
+    /**
+     * @param rmCost the rmCost to set
+     */
+    public void setRmCost(double rmCost) {
+        this.rmCost = rmCost;
     }
 }

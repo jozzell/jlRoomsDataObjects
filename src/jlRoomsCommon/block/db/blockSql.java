@@ -63,6 +63,16 @@ public class blockSql extends objMgr{
      ;
       }
   }
+  public  String sqlGrabBlockId(String web){
+      if (web == null){
+          return sqlGetBlockId;
+      } else {
+          return 
+                  "select max(block_id) from block where sponsor_id = ? and lookup_id = ? and sponsor_hotel_id = ?"+
+                  getEMailKeyEquals(web)
+     ;
+      }
+  }
   public  String sqlBrwBlockSubCnt_V3(String web){
       if (sqlBrwBlockSubCnt == null){
           return sqlBrwBlockSubCnt;
@@ -96,7 +106,7 @@ public class blockSql extends objMgr{
                   getEMailKeyEquals(web);
       }
   }
-  private  String 
+  private final  String 
       sqlBlockSwitch =sql+ "  and b.sponsor_hotel_id in (select sponsor_hotel_id from block where block_id = ?) order by v.vendor_name",
       sqlBrwBlockSponsorHotelId = sql+ " and b.sponsor_hotel_id = ? and l.lookup_rollup_id = ? order by upper(l.lookup_desc),b.block_comment",
       sqlAvlBooking = sql+" and b.sponsor_id = ? and l.lookup_rollup_id = ? order by v.vendor_name,upper(l.lookup_desc),b.block_comment",

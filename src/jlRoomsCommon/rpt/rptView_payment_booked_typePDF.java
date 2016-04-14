@@ -4,17 +4,18 @@
  */
 package jlRoomsCommon.rpt;
 
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jlRoomsCommon.jlRoomsFactoryRpt;
 import jlRoomsCommon.objMgr;
-import jlRoomsDO.JlRoomsDataObjects;
+import jlRoomsCommon.JlRoomsDataObjects;
 import obj.reusableObj;
 import sun.jdbc.rowset.CachedRowSet;
 
@@ -73,11 +74,11 @@ public class rptView_payment_booked_typePDF extends objMgr {
                     brk = new PdfPCell();
             brk.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
             brk.setColspan(7);
-            //brk.setBackgroundColor(Color.lightGray);
+            //brk.setBackgroundColor(BaseColor.LIGHT_GRAY);
 
             cntr.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
             rght.setHorizontalAlignment(PdfPCell.ALIGN_RIGHT);
-            head.setBackgroundColor(Color.lightGray);
+            head.setBackgroundColor(BaseColor.LIGHT_GRAY);
             head.setColspan(8);
             reusableObj reusableObj = new reusableObj();
             while (cr.next()) {
@@ -189,7 +190,7 @@ public class rptView_payment_booked_typePDF extends objMgr {
              table.addCell(head);
              
              rght.setPhrase(jlRoomsFactoryRpt.getRptFont(this.getDollarFormat(gTot)));
-             rght.setBackgroundColor(Color.lightGray);
+             rght.setBackgroundColor(BaseColor.LIGHT_GRAY);
              table.addCell(rght);
             (new JlRoomsDataObjects()).docPgBreak(doc,"Payment (Booked)");
             doc.add(table);

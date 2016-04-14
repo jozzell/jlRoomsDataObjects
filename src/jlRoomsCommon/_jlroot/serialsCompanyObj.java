@@ -4,6 +4,7 @@
  */
 package jlRoomsCommon._jlroot;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,9 +15,7 @@ import jlRoomsCommon._beans.custBean;
 import jlRoomsCommon._beans.loginBean;
 import jlRoomsCommon._beans.vendorBean;
 //import  jlRoomsCommon._jlroot.serialsObj.checkDupCompany;
-import jlRoomsDO.JlRoomsDataObjects;
-import jlRoomsDO.jlBookingMgrEnum;
-import jlRoomsDO.vendorObjTypesENum;
+import jlRoomsCommon.jlBookingMgrEnum;
 import obj.db.v1.dbMgrInterface;
 import sun.jdbc.rowset.CachedRowSet;
 
@@ -24,7 +23,7 @@ import sun.jdbc.rowset.CachedRowSet;
  *
  * @author lmeans
  */
-public class serialsCompanyObj {
+public class serialsCompanyObj implements Serializable{
     serialsSql serialsSql;
     serialsObj serialsObj;
     public serialsCompanyObj(){
@@ -168,7 +167,7 @@ public class serialsCompanyObj {
         }
          return serialsBean;
     }
-     public  void updateCompanyBean(vendorBean b,dbMgrInterface db,boolean ok){
+     public  void updateCompanyBean(vendorBean b,dbMgrInterface db){
         try {
             db.updateDatabase(serialsSql.sqlUpdateCompany, newComapnyBeanUpdate(b));
         } catch (Exception ex) {
